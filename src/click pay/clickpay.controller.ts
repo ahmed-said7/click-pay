@@ -41,7 +41,7 @@ export class ClickPayController {
     console.log(req.query);
   }
   @Post('return')
-  async handleReturn() {
-    return { status: 'success' };
+  async handleReturn(@Req() req: any) {
+    return { status: req.body };
   }
 }
