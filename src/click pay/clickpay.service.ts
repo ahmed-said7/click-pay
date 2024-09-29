@@ -23,8 +23,8 @@ export class ClickPayService {
       cart_description: `Payment for Order ${orderId}`,
       cart_currency: 'SAR',
       cart_amount: amount,
-      callback: 'https://click-pay-frax.vercel.app/clickpay/callback', // Your callback URL
-      return: 'https://click-pay-frax.vercel.app/clickpay/return', // URL the user is returned to after payment
+      callback: 'https://click-pay-533n.vercel.app//clickpay/callback', // Your callback URL
+      return: 'https://click-pay-533n.vercel.app//clickpay/return', // URL the user is returned to after payment
     };
 
     try {
