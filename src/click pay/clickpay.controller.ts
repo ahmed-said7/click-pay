@@ -1,8 +1,6 @@
 import { Controller, Post, Body, Req } from '@nestjs/common';
-
 import { IsNumber, IsString } from 'class-validator';
 import { ClickPayService } from './clickpay.service';
-import { console } from 'inspector';
 
 export class CreatePaymentDto {
   @IsString()
@@ -37,8 +35,7 @@ export class ClickPayController {
   // Endpoint to handle callback from ClickPay
   @Post('callback')
   async handleCallback(@Req() req: any) {
-    console.log(req.body);
-    console.log(req.query);
+    return this.clickPayService.queryPayment(req.body.tranRef);
   }
   @Post('return')
   async handleReturn(@Req() req: any) {

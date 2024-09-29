@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-// SHJNM2HDT9-JJZMHKKJ9T-TB6HHNDNDB
-// SLJNM2HDW2-JJZMKZHNKJ-JZLTGLNDZ6
+
 @Injectable()
 export class ClickPayService {
   private readonly apiUrl: string = 'https://api.clickpay.com';
@@ -45,5 +44,33 @@ export class ClickPayService {
       throw new Error('Payment creation failed');
     }
   }
-  // async validatePayment(){}
+
+  async queryPayment(tranRef: string): Promise<any> {
+    const url = 'https://secure.clickpay.com.sa/payment/query';
+
+    const headers = {
+      Authorization: `${this.apiKey}`,
+      'Content-Type': 'application/json',
+    };
+
+    const data = {
+      profile_id: this.profileId,
+      tran_ref: tranRef,
+    };
+
+    try {
+      const response = await axios.post(url, data, { headers });
+      const status = response.data.payment_result.response_status;
+      const cart = response.data.cart_id;
+      return { cart, status };
+    } catch (error) {
+      console.error(
+        'Error querying payment:',
+        error.response?.data || error.message,
+      );
+      throw error; // Handle error appropriately
+    }
+  }
+
+  // {"tranRef":"TST2427300206415"}
 }
